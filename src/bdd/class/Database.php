@@ -1,10 +1,10 @@
 <?php
 class Database {
-    private $host = "database";
-    private $dbname = "SocialSport";
-    private $username = "root";
-    private $password = "root";
-    private $conn;
+    private string $host = "database";
+    private string $dbname = "SocialSport";
+    private string $username = "root";
+    private string $password = "root";
+    private PDO $conn;
 
     public function __construct() {
         try {
