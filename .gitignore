@@ -1,0 +1,31 @@
+# Ignore composer vendor directory
+/vendor/
+
+# Ignore any log files
+*.log
+
+# Ignore any compiled PHP files
+*.php[34567]
+*.phtml
+
+# Ignore any user-specific configuration files
+/.vscode/
+/.idea/
+
+# Ignore any database files
+*.sqlite
+
+# Ignore any session files
+/sessions/
+
+# Ignore any cache files
+/cache/
+
+# Ignore any build artifacts
+/build/
+
+# Ignore any environment-specific files
+.env
+
+# Ignore any sensitive or personal files
+config.php
