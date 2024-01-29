@@ -22,3 +22,6 @@ services:
       MYSQL_DATABASE: SocialSport
     ports:
       - 3306:3306
+networks:
+  app-network:
+    driver: bridge
