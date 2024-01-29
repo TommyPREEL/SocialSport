@@ -1,0 +1,22 @@
+version: '3.3'
+
+services:
+  php:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: php-social-sport
+    image: php:8.2-apache
+    volumes:
+      - ./src:/var/www/html/
+    ports:
+      - "8080:80"
+  database:
+    container_name: database-social-sport
+    image: mysql:8.0
+    command: --default-authentication-plugin=mysql_native_password
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: SocialSport
+    ports:
+      - 3306:3306
