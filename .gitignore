@@ -29,3 +29,7 @@
 
 # Ignore any sensitive or personal files
 config.php
+
+# Ignore database
+
+/database/

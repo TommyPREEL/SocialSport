@@ -6,9 +6,9 @@
         <title>SocialSport</title>
         <?php
             session_start();
-            require_once("../bdd/class/Database.php");
-            include("./views/v_header.php");
-            include("./views/v_main.php");
+            require_once("./bdd/class/Database.php");
+            include("./front/views/v_header.php");
+            include("./front/views/v_main.php");
         ?>
     </head>
     <body>
@@ -23,17 +23,17 @@
             {
                 case "main":
                     {
-                        include("./controllers/c_main.php");
+                        include("./front/controllers/c_main.php");
                         break;
                     }
                 case "users":
                     {
-                        include("./controllers/c_users.php");
+                        include("./front/controllers/c_users.php");
                         break;
                     }
                 case "events":
                     {
-                        include("./controllers/c_events.php");
+                        include("./front/controllers/c_events.php");
                         break;
                     }
             }
