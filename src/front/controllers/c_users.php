@@ -1,7 +1,7 @@
 <?php
 require_once("./bdd/class/Database.php");
-require_once("./front/features/event/user.repository.php");
-$database = new Database();
+require_once("./front/features/user/user.repository.php");
+$database = Database::getInstance();
 $userRepository = new UserRepository($database);
 
 $action = $_REQUEST["action"] ?? "";
