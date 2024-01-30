@@ -1,6 +1,6 @@
 <?php
 
-readonly class UserRepository
+class UserRepository
 {
   public function __construct(private Database $database)
   {

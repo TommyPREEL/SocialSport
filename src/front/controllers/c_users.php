@@ -46,11 +46,20 @@ switch ($action) {
         $_POST["password"]
       );
       $_SESSION["user"] = $user;
+      header("Location: ".$_SERVER['PHP_SELF']);
+      exit();
       break;
     } catch (Exception $e) {
       echo $e->getMessage();
       break;
     }
+  }
+  case "logout":
+  {
+    unset($_SESSION["user"]);
+    header("Location: ".$_SERVER['PHP_SELF']);
+    exit();
+    break;
   }
 
   default:

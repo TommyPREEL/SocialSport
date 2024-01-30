@@ -51,7 +51,64 @@ switch ($action) {
 
     try {
       $eventRepository->create($event);
-      echo "OUAIS CEST OK MON REUF";
+      break;
+    } catch (Exception $e) {
+      echo $e->getMessage();
+      break;
+    }
+  }
+
+  case "editForm":
+  {
+    try {
+      $id_events = $_REQUEST["id"];
+      $event = $eventRepository->getById($id_events);
+      include("./front/views/v_event_edit.php");
+      break;
+    } catch (Exception $e) {
+      echo $e->getMessage();
+      break;
+    }
+  }
+
+  case "edit":
+  {
+    $event = [
+      "id_events" => $_REQUEST["id"],
+      "date" => [
+        "start" => $_POST["start_date"],
+        "end" => $_POST["end_date"]
+      ],
+      "location" => [
+        "start" => $_POST["start_location"],
+        "end" => $_POST["end_location"]
+      ],
+      "requirements" => [
+        "skill" => $_POST["skill_requirements"] ?? "aucune",
+        "material" => $_POST["material_requirements"] ?? "aucune"
+      ],
+      "conditions" => [
+        "legal" => $_POST["legal_conditions"] ?? "aucune",
+        "meteorological" => $_POST["meteorological_conditions"] ?? "aucune"
+      ],
+      "limitRegistrationDate" => $_POST["limit_registration_date"],
+    ];
+
+    try {
+      $eventRepository->update($event);
+      break;
+    } catch (Exception $e) {
+      echo $e->getMessage();
+      break;
+    }
+  }
+
+  case "delete":
+  {
+    $id = $_REQUEST["id"];
+    try {
+      $eventRepository->delete($id);
+      header("Location: ".$_SERVER['PHP_SELF']);
       break;
     } catch (Exception $e) {
       echo $e->getMessage();

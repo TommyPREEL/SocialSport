@@ -1,15 +1,5 @@
 <?php foreach ($events as $event): ?>
     <div class="card">
-    <header class="card-header">
-        <p class="card-header-title">
-        Component
-        </p>
-        <button class="card-header-icon" aria-label="more options">
-        <span class="icon">
-            <i class="fas fa-angle-down" aria-hidden="true"></i>
-        </span>
-        </button>
-    </header>
     <div class="card-content">
         <div class="content">
             <ion-icon name="pin"></ion-icon>
@@ -33,8 +23,8 @@
     </div>
     <footer class="card-footer">
         <a href="#" class="card-footer-item">Participate</a>
-        <a href="#" class="card-footer-item">Edit</a>
-        <a href="#" class="card-footer-item">Delete</a>
+        <a href="index.php?controller=events&action=editForm&id=<?= $event["id_events"]; ?>" class="card-footer-item">Edit</a>
+        <a href="index.php?controller=events&action=delete&id=<?= $event["id_events"]; ?>" class="card-footer-item">Delete</a>
     </footer>
     </div>
 <?php endforeach; ?>

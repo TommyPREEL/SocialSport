@@ -8,9 +8,8 @@
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
     <title>SocialSport</title>
   <?php
-  include("./front/views/v_header.php");
-  include("./front/views/v_main.php");
   session_start();
+  include("./front/views/v_header.php");
   ?>
 </head>
 <body>

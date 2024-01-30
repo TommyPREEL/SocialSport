@@ -4,10 +4,10 @@ class Database
 {
   private static ?Database $databaseInstance;
   public PDO $PDO;
-  private string $host = "database";
+  private string $host = "localhost";
   private string $dbname = "SocialSport";
   private string $username = "root";
-  private string $password = "root";
+  private string $password = "";
 
   private function __construct()
   {
