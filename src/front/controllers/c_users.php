@@ -33,6 +33,20 @@ switch ($action) {
       break;
     }
   }
+  case "login":
+    {
+      try {
+        $user = $bdd->findUser(
+          $_POST["username"],
+          $_POST["password"]
+        );
+        $_SESSION["user"] = $user;
+        break;
+      } catch (Exception $e) {
+        echo $e->getMessage();
+        break;
+      }
+    }
 
   default:
     throw new Exception('Unexpected value');

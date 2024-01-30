@@ -8,6 +8,7 @@
   require_once("./bdd/class/Database.php");
   include("./front/views/v_header.php");
   include("./front/views/v_main.php");
+  session_start();
   ?>
 </head>
 <body>
