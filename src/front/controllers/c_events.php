@@ -1,7 +1,7 @@
 <?php
 require_once("./bdd/class/Database.php");
 require_once("./front/features/event/event.repository.php");
-$database = new Database();
+$database = Database::getInstance();
 $eventRepository = new EventRepository($database);
 
 $action = $_REQUEST["action"] ?? "";

@@ -2,13 +2,14 @@
 
 class Database
 {
+  private static ?Database $databaseInstance;
   public PDO $PDO;
   private string $host = "database";
   private string $dbname = "SocialSport";
   private string $username = "root";
   private string $password = "root";
 
-  public function __construct()
+  private function __construct()
   {
     try {
       $this->PDO = new PDO("mysql:host={$this->host};dbname={$this->dbname}", $this->username, $this->password);
@@ -16,6 +17,30 @@ class Database
     } catch (PDOException $e) {
       die("Échec de la connexion : " . $e->getMessage());
     }
+  }
+
+  public static function getInstance(): Database
+  {
+    if (!isset(self::$databaseInstance)) {
+      self::$databaseInstance = new static();
+    }
+
+    return self::$databaseInstance;
+  }
+
+  /**
+   * Singletons should not be restored from strings.
+   */
+  public function __wakeup()
+  {
+    throw new Exception("Cannot unserialize a singleton.");
+  }
+
+  /**
+   * Singletons should not be cloneable.
+   */
+  protected function __clone()
+  {
   }
 }
 
