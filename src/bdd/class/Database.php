@@ -2,17 +2,17 @@
 
 class Database
 {
-  private string $host = "localhost";
+  public PDO $PDO;
+  private string $host = "database";
   private string $dbname = "SocialSport";
   private string $username = "root";
-  private string $password = "";
-  private PDO $conn;
+  private string $password = "root";
 
   public function __construct()
   {
     try {
-      $this->conn = new PDO("mysql:host={$this->host};dbname={$this->dbname}", $this->username, $this->password);
-      $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+      $this->PDO = new PDO("mysql:host={$this->host};dbname={$this->dbname}", $this->username, $this->password);
+      $this->PDO->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     } catch (PDOException $e) {
       die("Échec de la connexion : " . $e->getMessage());
     }
@@ -21,14 +21,14 @@ class Database
   public function getUsers()
   {
     $sql = "SELECT * FROM users";
-    $stmt = $this->conn->query($sql);
+    $stmt = $this->PDO->query($sql);
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
   }
 
   public function createUser($firstname, $lastname, $username, $password, $phone, $birthdayDate, $country, $postalCode, $gender, $job)
   {
     $sql = "INSERT INTO users (firstname, lastname, username, password, phone, birthday_date, country, postal_code, gender, job) VALUES (:firstname, :lastname, :username, :password, :phone, :birthdayDate, :country, :postalCode, :gender, :job)";
-    $stmt = $this->conn->prepare($sql);
+    $stmt = $this->PDO->prepare($sql);
     $stmt->bindParam(':firstname', $firstname);
     $stmt->bindParam(':lastname', $lastname);
     $stmt->bindParam(':username', $username);
@@ -70,7 +70,7 @@ class Database
 
   public function closeConnection()
   {
-    $this->conn = null;
+    $this->PDO = null;
   }
 }
 
