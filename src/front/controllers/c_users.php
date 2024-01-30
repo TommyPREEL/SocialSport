@@ -1,4 +1,9 @@
 <?php
+require_once("./bdd/class/Database.php");
+require_once("./front/features/event/user.repository.php");
+$database = new Database();
+$userRepository = new UserRepository($database);
+
 $action = $_REQUEST["action"] ?? "";
 switch ($action) {
   case "showLoginPage":
@@ -14,7 +19,7 @@ switch ($action) {
   case "register":
   {
     try {
-      $bdd->createUser(
+      $userRepository->create(
         $_POST["firstName"],
         $_POST["lastName"],
         $_POST["username"],
@@ -34,19 +39,19 @@ switch ($action) {
     }
   }
   case "login":
-    {
-      try {
-        $user = $bdd->findUser(
-          $_POST["username"],
-          $_POST["password"]
-        );
-        $_SESSION["user"] = $user;
-        break;
-      } catch (Exception $e) {
-        echo $e->getMessage();
-        break;
-      }
+  {
+    try {
+      $user = $userRepository->findOne(
+        $_POST["username"],
+        $_POST["password"]
+      );
+      $_SESSION["user"] = $user;
+      break;
+    } catch (Exception $e) {
+      echo $e->getMessage();
+      break;
     }
+  }
 
   default:
     throw new Exception('Unexpected value');

@@ -6,7 +6,6 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
     <title>SocialSport</title>
   <?php
-  require_once("./bdd/class/Database.php");
   include("./front/views/v_header.php");
   include("./front/views/v_main.php");
   session_start();
@@ -14,7 +13,6 @@
 </head>
 <body>
 <?php
-$bdd = new Database();
 if (!isset($_REQUEST["controller"]))
   $controller = "main";
 else

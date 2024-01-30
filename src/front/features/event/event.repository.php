@@ -6,6 +6,13 @@ readonly class EventRepository
   {
   }
 
+  public function getAll()
+  {
+    $sql = "SELECT * FROM events";
+    $statement = $this->database->PDO->query($sql);
+    return $statement->fetch();
+  }
+
   public function create($event): bool
   {
     $sql = "
