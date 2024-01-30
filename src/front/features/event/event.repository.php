@@ -1,6 +1,6 @@
 <?php
 
-readonly class EventRepository
+class EventRepository
 {
   public function __construct(private Database $database)
   {
@@ -10,7 +10,7 @@ readonly class EventRepository
   {
     $sql = "SELECT * FROM events";
     $statement = $this->database->PDO->query($sql);
-    return $statement->fetch();
+    return $statement->fetchAll();
   }
 
   public function create($event): bool

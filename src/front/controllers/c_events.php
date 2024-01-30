@@ -10,11 +10,9 @@ switch ($action) {
   case "showEventsListPage":
   {
     try {
-      $eventRepository->getAll();
-      break;
+      $events = $eventRepository->getAll();
     } catch (Exception $e) {
       echo $e->getMessage();
-      break;
     }
     include("./front/views/v_events_list.php");
     break;
