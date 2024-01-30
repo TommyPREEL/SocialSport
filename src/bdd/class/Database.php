@@ -45,15 +45,14 @@ class Database
   public function findUser($username, $password)
   {
     $sql = "SELECT firstname, lastname, username, phone, birthday_date, country, postal_code, gender, job, role FROM users WHERE username='$username' AND password='$password'";
-    $stmt = $this->conn->prepare($sql);
-    $stmt = $this->conn->query($sql);
+    $stmt = $this->PDO->query($sql);
     return $stmt->fetch(PDO::FETCH_ASSOC);
   }
 
   public function createEvent($start_date, $start_location, $end_date, $end_location, $skill_requirements, $material_requirements, $meteorological_conditions, $legal_conditions, $limit_registration_date, $event_score, $member_score)
   {
     $sql = "INSERT INTO events (start_date, start_location, end_date, end_location, skill_requirements, material_requirements, meteorological_conditions, legal_conditions, limit_registration_date, event_score, member_score) VALUES (:start_date, :start_location, :end_date, :end_location, :skill_requirements, :material_requirements, :meteorological_conditions, :legal_conditions, :limit_registration_date, :event_score, :member_score)";
-    $stmt = $this->conn->prepare($sql);
+    $stmt = $this->PDO->prepare($sql);
     $stmt->bindParam(':start_date', $start_date);
     $stmt->bindParam(':start_location', $start_location);
     $stmt->bindParam(':end_date', $end_date);

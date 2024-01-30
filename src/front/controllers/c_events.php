@@ -1,52 +1,63 @@
 <?php
-  $action = $_REQUEST["action"] ?? "";
-  switch($action) {
-    case "showEventsListPage":
-    {
-      try {
-        $bdd->getEventsList();
-        break;
-      } catch (Exception $e) {
-        echo $e->getMessage();
-        break;
-      }
-      include("./front/views/v_events_list.php");
+$action = $_REQUEST["action"] ?? "";
+require_once("./front/features/Event/event.repository.php");
+$eventRepository = new EventRepository($bdd);
+
+switch ($action) {
+  case "showEventsListPage":
+  {
+    try {
+      $bdd->getEventsList();
+      break;
+    } catch (Exception $e) {
+      echo $e->getMessage();
       break;
     }
-    case "showEventDetailsPage":
-    {
-      include("./front/views/v_event_details.php");
+    include("./front/views/v_events_list.php");
+    break;
+  }
+  case "showEventDetailsPage":
+  {
+    include("./front/views/v_event_details.php");
+    break;
+  }
+  case "showEventCreatePage":
+  {
+    include("./front/views/v_event_create.php");
+    break;
+  }
+  case "createEvent":
+  {
+    $event = [
+      "date" => [
+        "start" => $_POST["start_date"],
+        "end" => $_POST["end_date"]
+      ],
+      "location" => [
+        "start" => $_POST["start_location"],
+        "end" => $_POST["end_location"]
+      ],
+      "requirements" => [
+        "skill" => $_POST["skill_requirements"] ?? "aucune",
+        "material" => $_POST["material_requirements"] ?? "aucune"
+      ],
+      "conditions" => [
+        "legal" => $_POST["legal_conditions"] ?? "aucune",
+        "meteorological" => $_POST["meteorological_conditions"] ?? "aucune"
+      ],
+      "limitRegistrationDate" => $_POST["limit_registration_date"],
+    ];
+
+    try {
+      $eventRepository->create($event);
+      echo "OUAIS CEST OK MON REUF";
+      break;
+    } catch (Exception $e) {
+      echo $e->getMessage();
       break;
     }
-    case "showEventCreatePage":
-    {
-      include("./front/views/v_event_create.php");
-      break;
-    }
-    case "createEvent":
-    {
-      try {
-        $bdd->createEvent(
-          $_POST["start_date"],
-          $_POST["start_location"],
-          $_POST["end_date"],
-          $_POST["end_location"],
-          $_POST["skill_requirements"],
-          $_POST["material_requirements"],
-          $_POST["meteorological_conditions"],
-          $_POST["legal_conditions"],
-          $_POST["limit_registration_date"],
-          $_POST["event_score"],
-          $_POST["member_score"]
-        );
-        echo "OUAIS CEST OK MON REUF";
-        break;
-      } catch (Exception $e) {
-        echo $e->getMessage();
-        break;
-      }
-      break;
-    }
+    break;
+  }
 
 //   case "register":
 //   {
@@ -85,7 +96,7 @@
 //       }
 //     }
 
-    default:
-      throw new Exception('Unexpected value');
-  }
+  default:
+    throw new Exception('Unexpected value');
+}
 ?>
