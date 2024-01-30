@@ -33,3 +33,5 @@ config.php
 # Ignore database
 
 /database/
+
+/src/bdd/class/Database.php
