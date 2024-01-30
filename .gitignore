@@ -35,3 +35,4 @@ config.php
 /database/
 
 /src/bdd/class/Database.php
+src/bdd/class/Database.php
