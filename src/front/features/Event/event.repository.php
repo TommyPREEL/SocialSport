@@ -1,8 +1,8 @@
 <?php
 
-class EventRepository
+readonly class EventRepository
 {
-  public function __construct(private readonly Database $database)
+  public function __construct(private Database $database)
   {
   }
 
@@ -14,41 +14,20 @@ class EventRepository
       ";
 
     $statement = $this->database->PDO->prepare($sql);
-    $statement->bindParam(":start_date", $event->date->start);
-    $statement->bindParam(":start_location", $event->location->start);
-    $statement->bindParam(":end_date", $event->date->end);
-    $statement->bindParam(":end_location", $event->location->end);
+    $statement->bindParam(":start_date", $event["date"]["start"]);
+    $statement->bindParam(":start_location", $event["location"]["start"]);
+    $statement->bindParam(":end_date", $event["date"]["end"]);
+    $statement->bindParam(":end_location", $event["location"]["end"]);
 
     // Requirements
-    $statement->bindParam(":skill_requirements", $event->requirements->skill);
-    $statement->bindParam(":material_requirements", $event->requirements->material);
+    $statement->bindParam(":skill_requirements", $event["requirements"]["skill"]);
+    $statement->bindParam(":material_requirements", $event["requirements"]["material"]);
 
-    $statement->bindParam(":meteorological_conditions", $event->conditions->meteorological);
-    $statement->bindParam(":legal_conditions", $event->conditions->legal);
+    $statement->bindParam(":meteorological_conditions", $event["conditions"]["meteorological"]);
+    $statement->bindParam(":legal_conditions", $event["conditions"]["legal"]);
 
-    $statement->bindParam(":limit_registration_date", $event->limitRegistrationDate);
+    $statement->bindParam(":limit_registration_date", $event["limitRegistrationDate"]);
 
     return $statement->execute();
   }
 }
-/*
-{
-    "date": {
-        "start": "2024-02-05T09:00:00.000Z"
-        "end": "2024-02-05T17:00:00.000Z"
-    },
-    "location": {
-        "start": "81 rue des potiers, 75000 Paris",
-        "end": "106 rue des potiers, 75000 Paris"
-    },
-    "requirements": {
-        "skill": "aucune",
-        "material": "aucune"
-    },
-    "conditions": {
-        "legal": "aucune",
-        "meteorological": "aucune"
-    },
-    "limitRegistrationDate": "2024-01-31T20:00:00.000Z",
-}
-*/

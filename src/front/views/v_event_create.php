@@ -1,5 +1,5 @@
 <div style="display: flex; flex-direction: column; max-width: 200px; margin: 10px;">
-    <form action="index.php?controller=users&action=createEvent" method="post">
+    <form action="index.php?controller=events&action=createEvent" method="post">
         Start Date
         <input type="datetime" placeholder="Start Date" name="start_date" value="2023-08-08"/><br>
         Start Location
