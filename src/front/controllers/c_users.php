@@ -31,7 +31,7 @@ switch ($action) {
         $_POST["gender"],
         $_POST["job"]
       );
-      echo("walidé");
+      header("Location: ".$_SERVER['PHP_SELF']);
       break;
     } catch (Exception $e) {
       echo $e->getMessage();

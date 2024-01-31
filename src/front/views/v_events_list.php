@@ -23,8 +23,8 @@
     </div>
     <footer class="card-footer">
         <a href="#" class="card-footer-item">Participate</a>
-        <a href="index.php?controller=events&action=editForm&id=<?= $event["id_events"]; ?>" class="card-footer-item">Edit</a>
-        <a href="index.php?controller=events&action=delete&id=<?= $event["id_events"]; ?>" class="card-footer-item">Delete</a>
+        <?php if(isset($_SESSION["user"])): ?><a href="index.php?controller=events&action=editForm&id=<?= $event["id_events"]; ?>" class="card-footer-item">Edit</a><?php endif; ?>
+        <?php if(isset($_SESSION["user"])): ?><a href="index.php?controller=events&action=delete&id=<?= $event["id_events"]; ?>" class="card-footer-item">Delete</a><?php endif; ?>
     </footer>
     </div>
 <?php endforeach; ?>

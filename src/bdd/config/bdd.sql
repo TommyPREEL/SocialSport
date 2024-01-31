@@ -28,15 +28,9 @@ CREATE TABLE events(
    limit_registration_date DATETIME,
    event_score INT,
    member_score INT,
-   PRIMARY KEY(id_events)
-);
-
-CREATE TABLE manage(
-   id_users INT,
-   id_events INT,
-   PRIMARY KEY(id_users, id_events),
-   FOREIGN KEY(id_users) REFERENCES users(id_users),
-   FOREIGN KEY(id_events) REFERENCES events(id_events)
+   id_users INT NOT NULL,
+   PRIMARY KEY(id_events),
+   FOREIGN KEY(id_users) REFERENCES users(id_users)
 );
 
 CREATE TABLE participate(
